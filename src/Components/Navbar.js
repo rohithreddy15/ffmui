@@ -7,6 +7,7 @@ export default function Navbar() {
    <ul>
 <li><NavLink  to="/">Home </NavLink></li>
     <NavLink to="/Login"> Login</NavLink>
+    <li><NavLink to="/Employee">Employee</NavLink></li> 
 
     <li><NavLink to="/VisitInfo">VisitInfo</NavLink></li> 
  <li><NavLink to="/Dealer">Dealer</NavLink></li> 
