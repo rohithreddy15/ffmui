@@ -35,11 +35,108 @@ const Employee = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission, e.g., send data to backend
-    console.log('Form submitted with data:', formData);
+
+    try {
+      const response = await fetch('http://localhost:8080/emp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Data successfully submitted to the server!');
+        // Optionally, you can reset the form after successful submission
+        // setFormData({ ...initialFormData });
+      } else {
+        const responseBody = await response.text();
+        console.error('Failed to submit data to the server. Response:', response.status, responseBody);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
+
+  const handleGet = async () => {
+    // Ask for empcode before making the GET request
+    const empCode = prompt('Enter Empcode:');
+    if (!empCode) return; // Cancelled
+
+    try {
+      const response = await fetch(`http://localhost:8080/empget/${empCode}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Data fetched successfully:', data);
+        // Optionally, update the form with fetched data
+        // setFormData(data);
+      } else {
+        console.error('Failed to fetch data. Response:', response.status);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handlePut = async () => {
+    // Ask for empcode before making the PUT request
+    const empCode = prompt('Enter Empcode:');
+    if (!empCode) return; // Cancelled
+
+    try {
+      const response = await fetch(`http://localhost:8080/empupdate/${empCode}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Data successfully updated on the server!');
+      } else {
+        const responseBody = await response.text();
+        console.error('Failed to update data. Response:', response.status, responseBody);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleDelete = async () => {
+    // Ask for empcode before making the DELETE request
+    const empCode = prompt('Enter Empcode:');
+    if (!empCode) return; // Cancelled
+
+    try {
+      const response = await fetch(`http://localhost:8080/empdel/${empCode}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        console.log('Data successfully deleted on the server!');
+        // Optionally, reset the form after deletion
+        // setFormData({ ...initialFormData });
+      } else {
+        const responseBody = await response.text();
+        console.error('Failed to delete data. Response:', response.status, responseBody);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
 
   return (
     <div>
@@ -133,7 +230,7 @@ const Employee = () => {
       <br />
       <label>
         Is Active:
-        <input type="checkbox" name="isactive" checked={formData.isactive} onChange={handleChange} />
+        <input type="boolean" name="isactive" checked={formData.isactive} onChange={handleChange} />
       </label>
       <br />
       <label>
@@ -163,6 +260,10 @@ const Employee = () => {
       <br />
       <button type="submit">Submit</button>
     </form>
+    
+    <button onClick={handleGet}>Get Data</button>
+      <button onClick={handlePut}>Update Data</button>
+      <button onClick={handleDelete}>Delete Data</button>
     </div>
   );
 };
