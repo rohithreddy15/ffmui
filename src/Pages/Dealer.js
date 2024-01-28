@@ -19,13 +19,15 @@ import React, { useState } from 'react';
       stateid: '',
       cityid: '',
     });
+    const [showForm, setShowForm] = useState(false);
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
   
     // Function to handle form submission
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // You can perform actions with the form data, like sending it to a server
-      console.log('Form data submitted:', formData);
-    };
+    // const handleSubmit = (e) => {
+    //   e.preventDefault();
+    //   // You can perform actions with the form data, like sending it to a server
+    //   console.log('Form data submitted:', formData);
+    // };
   
     // Function to handle input changes
     const handleChange = (e) => {
@@ -35,15 +37,120 @@ import React, { useState } from 'react';
         [name]: value,
       });
     };
+    
+  const handleCreate = () => {
+    setFormData({}); // Clear existing form data
+    setShowForm(true);
+    setIsUpdateMode(false);
+  };
+
+  const handleUpdate = () => {
+    setShowForm(true);
+    setIsUpdateMode(true);
+ 
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+   
+        //var url = isUpdateMode ? `http://localhost:8080/updateplan/${planid}` : 'http://localhost:8080/plan';
+        var url;
+        if (isUpdateMode) {
+            var dealerid = prompt('Enter Dealerid to Update:');
+            url = `http://localhost:8080/dealerupdate/${dealerid}`;
+          } else {
+            url = 'http://localhost:8080/dealer';
+          }
+      const response = await fetch(url, {
+        method: isUpdateMode?'PUT':'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log(isUpdateMode ? 'Dealer data updated successfully!' : 'New Dealer registered successfully!');
+        setShowForm(false); 
+        setFormData({});
+      } else {
+        const responseBody = await response.text();
+        console.error(`Failed to ${isUpdateMode ? 'update' : 'create'} dealer data. Response:`, response.status, responseBody);      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleGet = async () => {
+    // Ask for empcode before making the GET request
+    var dealerid = prompt('Enter Dealerid:');
+    if (!dealerid) return; // Cancelled
+
+    try {
+      const response = await fetch(`http://localhost:8080/dealer/${dealerid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Data fetched successfully:', data);
+        // Optionally, update the form with fetched data
+        // setFormData(data);
+      } else {
+        console.error('Failed to fetch data. Response:', response.status);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+
+
+  const handleDelete = async () => {
+    // Ask for empcode before making the DELETE request
+    var dealerid = prompt('Enter DealerId:');
+    if (!dealerid) return; // Cancelled
+
+    try {
+      const response = await fetch(`http://localhost:8080/dealerdel/${dealerid}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        console.log('Data successfully deleted on the server!');
+        // Optionally, reset the form after deletion
+        // setFormData({ ...initialFormData });
+      } else {
+        const responseBody = await response.text();
+        console.error('Failed to delete data. Response:', response.status, responseBody);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
   
     return (
       <div>
         <h2>Dealer Registration</h2>
-        <form onSubmit={handleSubmit}>
+       
+        <button onClick={handleCreate}>Create Dealer</button>
+      <button onClick={handleUpdate}>Update Dealer Info</button>
+      <button onClick={handleGet}>Get Dealer Data</button>
+    
+    <button onClick={handleDelete}>Delete Dealer Data</button>
+        {showForm&&(<form onSubmit={handleSubmit}>
           <label>
             ID:
             <input
-              type="text"
+              type="number"
               name="id"
               value={formData.id}
               onChange={handleChange}
@@ -104,6 +211,16 @@ import React, { useState } from 'react';
           </label>
           <br/>
           <label>
+            Mandal:
+            <input
+              type="text"
+              name="mandal"
+              value={formData.mandal}
+              onChange={handleChange}
+            />
+          </label>
+          <br/>
+          <label>
             cityid:
             <input
               type="text"
@@ -135,8 +252,8 @@ import React, { useState } from 'react';
   
           <br />
           {/* Continue adding labels and inputs for the remaining attributes */}
-          <button type="submit">Submit</button>
-        </form>
+          <button type="submit">{isUpdateMode ? 'Update Dealer' : 'Create Dealer'}</button>
+        </form>)}
       </div>
     );
   };

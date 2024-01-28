@@ -17,18 +17,118 @@ const VisitInfoForm = () => {
       ...prevData,
       [name]: value,
     }));
+  }; 
+  const [showForm, setShowForm] = useState(false);
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
+
+   const handleCreate = () => {
+    setFormData({}); // Clear existing form data
+    setShowForm(true);
+    setIsUpdateMode(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission, e.g., send data to backend
-    console.log('Form submitted with data:', formData);
+  const handleUpdate = () => {
+    setShowForm(true);
+    setIsUpdateMode(true);
+ 
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+          // var url = isUpdateMode ? `http://localhost:8080/empupdate/${empCode}` : 'http://localhost:8080/emp';
+       var url;
+       if (isUpdateMode) {
+        var id = prompt('Enter id to Update:');
+        url = `http://localhost:8080/visitupdate/${id}`;
+      } else {
+        url = 'http://localhost:8080/visitinfo';
+      }
+      const response = await fetch(url, {
+        method: isUpdateMode?'PUT':'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log(isUpdateMode ? 'Visit data updated successfully!' : 'New VisitInfo created successfully!');
+        setShowForm(false); 
+        setFormData({});
+      } else {
+        const responseBody = await response.text();
+        console.error(`Failed to ${isUpdateMode ? 'update' : 'create'} employee data. Response:`, response.status, responseBody);      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleGet = async () => {
+    // Ask for empcode before making the GET request
+    var id = prompt('Enter id :');
+    if (!id) return; // Cancelled
+
+    try {
+      const response = await fetch(`http://localhost:8080/visitget/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Data fetched successfully:', data);
+        // Optionally, update the form with fetched data
+        // setFormData(data);
+      } else {
+        console.error('Failed to fetch data. Response:', response.status);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+
+
+  const handleDelete = async () => {
+   
+    var id = prompt('Enter id:');
+    if (!id) return; // Cancelled
+
+    try {
+      const response = await fetch(`http://localhost:8080/visitdel/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        console.log('Data successfully deleted on the server!');
+        // Optionally, reset the form after deletion
+        // setFormData({ ...initialFormData });
+      } else {
+        const responseBody = await response.text();
+        console.error('Failed to delete data. Response:', response.status, responseBody);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
 
   return (
     <div>
         <h2>VisitInfo</h2>
-    <form onSubmit={handleSubmit}>
+        <button onClick={handleCreate}>Create VisitInfo</button>
+      <button onClick={handleUpdate}>Update VisitInfo</button>
+      <button onClick={handleGet}>Get VisitInfo </button>
+    
+    <button onClick={handleDelete}>Delete VisitInfo </button>
+    {showForm&&(<form onSubmit={handleSubmit}>
       <label>
         ID:
         <input type="number" name="id" value={formData.id} onChange={handleChange} />
@@ -64,8 +164,8 @@ const VisitInfoForm = () => {
         <input type="number" name="distance_travelled" value={formData.distance_travelled} onChange={handleChange} />
       </label>
       <br />
-      <button type="submit">Submit</button>
-    </form>
+      <button type="submit">{isUpdateMode ? 'Update VisitInfo' : 'Create VisitInfo'}</button>
+    </form>)}
     </div>
   );
 };

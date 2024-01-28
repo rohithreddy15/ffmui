@@ -52,9 +52,14 @@ const Employee = () => {
     e.preventDefault();
 
     try {
+          // var url = isUpdateMode ? `http://localhost:8080/empupdate/${empCode}` : 'http://localhost:8080/emp';
+       var url;
+       if (isUpdateMode) {
         var empCode = prompt('Enter Empcode to Update:');
-        if (!empCode) return; // Cancelled
-        var url = isUpdateMode ? `http://localhost:8080/empupdate/${empCode}` : 'http://localhost:8080/emp';
+        url = `http://localhost:8080/empupdate/${empCode}`;
+      } else {
+        url = 'http://localhost:8080/emp';
+      }
       const response = await fetch(url, {
         method: isUpdateMode?'PUT':'POST',
         headers: {
@@ -104,7 +109,7 @@ const Employee = () => {
 
 
   const handleDelete = async () => {
-    // Ask for empcode before making the DELETE request
+   
     var empCode = prompt('Enter Empcode:');
     if (!empCode) return; // Cancelled
 
