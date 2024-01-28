@@ -101,30 +101,7 @@ const Employee = () => {
     }
   };
 
-//   const handlePut = async () => {
-//     // Ask for empcode before making the PUT request
-//      empCode = prompt('Enter Empcode:');
-//     if (!empCode) return; // Cancelled
 
-//     try {
-//       const response = await fetch(`http://localhost:8080/empupdate/${empCode}`, {
-//         method: 'PUT',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(formData),
-//       });
-
-//       if (response.ok) {
-//         console.log('Data successfully updated on the server!');
-//       } else {
-//         const responseBody = await response.text();
-//         console.error('Failed to update data. Response:', response.status, responseBody);
-//       }
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
-//   };
 
   const handleDelete = async () => {
     // Ask for empcode before making the DELETE request
