@@ -26,7 +26,9 @@ const Employee = () => {
     mgrid: 0,
     moblieno: '',
   });
-
+  const [showForm, setShowForm] = useState(false);
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -34,13 +36,27 @@ const Employee = () => {
       [name]: value,
     }));
   };
+  const handleCreate = () => {
+    setFormData({}); // Clear existing form data
+    setShowForm(true);
+    setIsUpdateMode(false);
+  };
+
+  const handleUpdate = () => {
+    setShowForm(true);
+    setIsUpdateMode(true);
+ 
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/emp', {
-        method: 'POST',
+        var empCode = prompt('Enter Empcode to Update:');
+        if (!empCode) return; // Cancelled
+        var url = isUpdateMode ? `http://localhost:8080/empupdate/${empCode}` : 'http://localhost:8080/emp';
+      const response = await fetch(url, {
+        method: isUpdateMode?'PUT':'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -48,13 +64,12 @@ const Employee = () => {
       });
 
       if (response.ok) {
-        console.log('Data successfully submitted to the server!');
-        // Optionally, you can reset the form after successful submission
-        // setFormData({ ...initialFormData });
+        console.log(isUpdateMode ? 'Employee data updated successfully!' : 'New employee created successfully!');
+        setShowForm(false); 
+        setFormData({});
       } else {
         const responseBody = await response.text();
-        console.error('Failed to submit data to the server. Response:', response.status, responseBody);
-      }
+        console.error(`Failed to ${isUpdateMode ? 'update' : 'create'} employee data. Response:`, response.status, responseBody);      }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -62,7 +77,7 @@ const Employee = () => {
 
   const handleGet = async () => {
     // Ask for empcode before making the GET request
-    const empCode = prompt('Enter Empcode:');
+    var empCode = prompt('Enter Empcode:');
     if (!empCode) return; // Cancelled
 
     try {
@@ -86,34 +101,34 @@ const Employee = () => {
     }
   };
 
-  const handlePut = async () => {
-    // Ask for empcode before making the PUT request
-    const empCode = prompt('Enter Empcode:');
-    if (!empCode) return; // Cancelled
+//   const handlePut = async () => {
+//     // Ask for empcode before making the PUT request
+//      empCode = prompt('Enter Empcode:');
+//     if (!empCode) return; // Cancelled
 
-    try {
-      const response = await fetch(`http://localhost:8080/empupdate/${empCode}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+//     try {
+//       const response = await fetch(`http://localhost:8080/empupdate/${empCode}`, {
+//         method: 'PUT',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(formData),
+//       });
 
-      if (response.ok) {
-        console.log('Data successfully updated on the server!');
-      } else {
-        const responseBody = await response.text();
-        console.error('Failed to update data. Response:', response.status, responseBody);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+//       if (response.ok) {
+//         console.log('Data successfully updated on the server!');
+//       } else {
+//         const responseBody = await response.text();
+//         console.error('Failed to update data. Response:', response.status, responseBody);
+//       }
+//     } catch (error) {
+//       console.error('Error:', error);
+//     }
+//   };
 
   const handleDelete = async () => {
     // Ask for empcode before making the DELETE request
-    const empCode = prompt('Enter Empcode:');
+    var empCode = prompt('Enter Empcode:');
     if (!empCode) return; // Cancelled
 
     try {
@@ -140,8 +155,9 @@ const Employee = () => {
 
   return (
     <div>
-        <h2>EmployeeForm</h2>
-    <form onSubmit={handleSubmit}>
+       <button onClick={handleCreate}>Create Employee</button>
+      <button onClick={handleUpdate}>Update Data</button>
+   {showForm&&( <form  onSubmit={ handleSubmit }>
       <label>
         Empcode:
         <input type="number" name="empcode" value={formData.empcode} onChange={handleChange} />
@@ -258,11 +274,11 @@ const Employee = () => {
         <input type="text" name="moblieno" value={formData.moblieno} onChange={handleChange} />
       </label>
       <br />
-      <button type="submit">Submit</button>
-    </form>
+      <button type="submit">{isUpdateMode ? 'Update Employee' : 'Create Employee'}</button>
+            </form>)}
     
     <button onClick={handleGet}>Get Data</button>
-      <button onClick={handlePut}>Update Data</button>
+    
       <button onClick={handleDelete}>Delete Data</button>
     </div>
   );
