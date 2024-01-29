@@ -5,15 +5,21 @@ export default function Navbar() {
   return (
 <nav>
  
-<NavLink  to="/">Home </NavLink>
-
-    <NavLink to="/Login"> Login</NavLink> 
-
-    <NavLink to="/Employee">Employee</NavLink>
-
-    <NavLink to="/VisitInfo">VisitInfo</NavLink>
+<NavLink  to="/Home">Home </NavLink>
+<br/>
+    {/* <NavLink to="/Login"> Login</NavLink>  */}
+    <NavLink to="/Plan">Plan</NavLink>
+    <br/>
+ <NavLink to="/Task">Task</NavLink>
+ <br/>
  <NavLink to="/Dealer">Dealer</NavLink>
- <NavLink to="/Plan">Plan</NavLink>
+ <br/>
+    <NavLink to="/Employee">Employee</NavLink>
+    <br/>
+    
+ 
+ <NavLink to="/VisitInfo">VisitInfo</NavLink>
+ 
 
   
     

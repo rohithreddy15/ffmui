@@ -1,23 +1,33 @@
-// Import necessary React components and hooks
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-// Functional component for the Login page
-const Login = () => {
-  // State variables to manage the username and password inputs
-  const [username, setUsername] = useState('');
+function Login() {
+  const [loginid, setLoginId] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  // Function to handle form submission
-  const handleLogin = (e) => {
-    e.preventDefault();
+  async function handleLogin(event) {
+    event.preventDefault();
 
-    // You can add authentication logic here
-    // For simplicity, let's just log the input values to the console
-    console.log('Username:', username);
-    console.log('Password:', password);
+    
+      const response = await axios.post("http://localhost:8080/login", {
+        loginid: loginid,
+        password: password,
+      });
 
-    // You may redirect the user or perform additional actions after authentication
-  };
+      if (response.data.loginid) {
+        
+        // Login successful, navigate to the home page or handle accordingly
+        navigate('/home');
+      } else {
+        
+        // Login failed, show an error message or handle accordingly
+        alert("Invalid credentials");
+      }
+    
+    
+  }
 
   return (
     <div>
@@ -26,9 +36,9 @@ const Login = () => {
         <label>
           Username:
           <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            value={loginid}
+            onChange={(e) => setLoginId(e.target.value)}
           />
         </label>
         <br />

@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import Header from './Header';
-const Plan = () => {
+const Task = () => {
   const [formData, setFormData] = useState({
     id: 1,
-    status: '',
-    created_date: '',
+    created_by:'',
+    assigned_to:'',
+    dealerid:'',
+    description: '',
+    status:'',
+    category:'',
+    assigned_date: '',
     completed_date: '',
-    distance: 0,
-    created_by: 1,
   });
   const [showForm, setShowForm] = useState(false);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
@@ -37,13 +40,13 @@ const Plan = () => {
 
     try {
    
-        //var url = isUpdateMode ? `http://localhost:8080/updateplan/${planid}` : 'http://localhost:8080/plan';
+        //var url = isUpdateMode ? `http://localhost:8080/updatetask/${taskid}` : 'http://localhost:8080/plan';
         var url;
         if (isUpdateMode) {
-            var planid = prompt('Enter planid to Update:');
-            url = `http://localhost:8080/updateplan/${planid}`;
+            var taskid = prompt('Enter taskid to Update:');
+            url = `http://localhost:8080//${taskid}`;
           } else {
-            url = 'http://localhost:8080/plan';
+            url = 'http://localhost:8080/task';
           }
       const response = await fetch(url, {
         method: isUpdateMode?'PUT':'POST',
@@ -54,12 +57,12 @@ const Plan = () => {
       });
 
       if (response.ok) {
-        console.log(isUpdateMode ? 'plan data updated successfully!' : 'New plan created successfully!');
+        console.log(isUpdateMode ? 'task data updated successfully!' : 'New task created successfully!');
         setShowForm(false); 
         setFormData({});
       } else {
         const responseBody = await response.text();
-        console.error(`Failed to ${isUpdateMode ? 'update' : 'create'} plan data. Response:`, response.status, responseBody);      }
+        console.error(`Failed to ${isUpdateMode ? 'update' : 'create'} task data. Response:`, response.status, responseBody);      }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -67,11 +70,11 @@ const Plan = () => {
 
   const handleGet = async () => {
     // Ask for empcode before making the GET request
-    var planid = prompt('Enter planid:');
-    if (!planid) return; // Cancelled
+    var taskid = prompt('Enter taskid:');
+    if (!taskid) return; // Cancelled
 
     try {
-      const response = await fetch(`http://localhost:8080/getplan/${planid}`, {
+      const response = await fetch(`http://localhost:8080/gettask/${taskid}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -95,11 +98,11 @@ const Plan = () => {
 
   const handleDelete = async () => {
     // Ask for empcode before making the DELETE request
-    var planid = prompt('Enter planId:');
-    if (!planid) return; // Cancelled
+    var taskid = prompt('Enter taskId:');
+    if (!taskid) return; // Cancelled
 
     try {
-      const response = await fetch(`http://localhost:8080/delplan/${planid}`, {
+      const response = await fetch(`http://localhost:8080/deltask/${taskid}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -121,8 +124,8 @@ const Plan = () => {
 
   return (
     <div>
-        <Header/>
-        <h2>Plan</h2>
+     <Header/>
+        <h2>Task</h2>
         <button onClick={handleCreate}>Create</button>
       <button onClick={handleUpdate}>Update</button>
       <button onClick={handleGet}>Get</button>
@@ -134,34 +137,49 @@ const Plan = () => {
       </label>
       <br />
       <label>
+        Created_date:
+        <input type="date" name="createddate" value={formData.created_date} onChange={handleChange} />
+      </label>
+      <br />
+      <label>
+        Assigned_to:
+        <input type="number" name="assignedto" value={formData.assigned_to} onChange={handleChange} />
+      </label>
+      <br />
+      <label>
+        Dealer_id:
+        <input type="number" name="dealerid" value={formData.dealerid} onChange={handleChange} />
+      </label>
+      <br />
+      <label>
         Status:
         <input type="text" name="status" value={formData.status} onChange={handleChange} />
       </label>
       <br />
       <label>
-        Created Date:
-        <input type="date" name="created_date" value={formData.created_date} onChange={handleChange} />
-      </label>
-      <br />
+        Category:
+        </label>
+         <select name="category" value={formData.category} onChange={handleChange}>
+         <option>Comlpaints</option>
+         <option>Payment Collection</option>
+         <option>Promotions</option>
+         <option>Other</option>
+         </select>
+      <br/>
       <label>
-        Completed Date:
-        <input type="date" name="completed_date" value={formData.completed_date} onChange={handleChange} />
+        Assigned_Date:
+        <input type="date" name="assigneddate" value={formData.assigned_date} onChange={handleChange} />
       </label>
-      <br />
+      <br></br>
       <label>
-        Distance:
-        <input type="number" name="distance" value={formData.distance} onChange={handleChange} />
+        Completed_date:
+        <input type="date" name="completeddate" value={formData.completed_date} onChange={handleChange} />
       </label>
       <br />
-      <label>
-        Created By:
-        <input type="number" name="created_by" value={formData.created_by} onChange={handleChange} />
-      </label>
-      <br />
-      <button type="submit">{isUpdateMode ? 'Update plan' : 'Create plan'}</button>
+      <button type="submit">{isUpdateMode ? 'Update task' : 'Create task'}</button>
     </form>)}
     </div>
   );
 };
 
-export default Plan;
+export default Task;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Header from './Header';
 const Employee = () => {
   const [formData, setFormData] = useState({
     empcode: 1,
@@ -137,8 +137,10 @@ const Employee = () => {
 
   return (
     <div>
-       <button onClick={handleCreate}>Create Employee</button>
-      <button onClick={handleUpdate}>Update Data</button>
+        <Header/>
+      <h2>Employee</h2>
+       <button onClick={handleCreate}>Create</button>
+      <button onClick={handleUpdate}>Update</button>
    {showForm&&( <form  onSubmit={ handleSubmit }>
       <label>
         Empcode:
@@ -259,9 +261,9 @@ const Employee = () => {
       <button type="submit">{isUpdateMode ? 'Update Employee' : 'Create Employee'}</button>
             </form>)}
     
-    <button onClick={handleGet}>Get Data</button>
+    <button onClick={handleGet}>Get</button>
     
-      <button onClick={handleDelete}>Delete Data</button>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 };

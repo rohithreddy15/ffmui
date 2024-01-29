@@ -2,7 +2,7 @@
 
 
 import React, { useState } from 'react';
-
+import Header from './Header';
   const DealerForm = () => {
     //const { future } = useMyContext();
     // State variables to manage form data
@@ -139,13 +139,14 @@ import React, { useState } from 'react';
   
     return (
       <div>
+          <Header/>
         <h2>Dealer Registration</h2>
        
-        <button onClick={handleCreate}>Create Dealer</button>
-      <button onClick={handleUpdate}>Update Dealer Info</button>
-      <button onClick={handleGet}>Get Dealer Data</button>
+        <button onClick={handleCreate}>Create</button>
+      <button onClick={handleUpdate}>Update</button>
+      <button onClick={handleGet}>Get</button>
     
-    <button onClick={handleDelete}>Delete Dealer Data</button>
+    <button onClick={handleDelete}>Delete</button>
         {showForm&&(<form onSubmit={handleSubmit}>
           <label>
             ID:

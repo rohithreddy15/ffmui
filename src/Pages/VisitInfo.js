@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Header from './Header';
 const VisitInfoForm = () => {
   const [formData, setFormData] = useState({
     id: 1,
@@ -122,12 +122,13 @@ const VisitInfoForm = () => {
 
   return (
     <div>
+      <Header/>
         <h2>VisitInfo</h2>
-        <button onClick={handleCreate}>Create VisitInfo</button>
-      <button onClick={handleUpdate}>Update VisitInfo</button>
-      <button onClick={handleGet}>Get VisitInfo </button>
+        <button onClick={handleCreate}>Create</button>
+      <button onClick={handleUpdate}>Update</button>
+      <button onClick={handleGet}>Get</button>
     
-    <button onClick={handleDelete}>Delete VisitInfo </button>
+    <button onClick={handleDelete}>Delete</button>
     {showForm&&(<form onSubmit={handleSubmit}>
       <label>
         ID:
