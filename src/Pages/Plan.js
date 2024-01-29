@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
+import Plantable from './Plantable';
 const Plan = () => {
   const [formData, setFormData] = useState({
     id: 1,
@@ -132,6 +133,7 @@ const Plan = () => {
     <div>
         <Header/>
         <h2>Plan</h2>
+        <Plantable/>
         <button onClick={handleCreate}>Create</button>
       <button onClick={handleUpdate}>Update</button>
       <button onClick={handleGet}>Get</button>
