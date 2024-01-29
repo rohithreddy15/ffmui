@@ -1,5 +1,5 @@
 
-import './App.css';
+
 import Login from './Pages/Login';
 import Dealer from './Pages/Dealer';
 import Home from './Pages/Home';
@@ -16,33 +16,8 @@ import Task from './Pages/Task';
 //   </header>
 // );
 
-const HeroSection = () => (
-  <section className="hero">
-    <h1>Welcome to Field Force Management</h1>
-    <p>Empower your team, streamline operations, and boost productivity.</p>
-  </section>
-);
 
-const Feature = ({ title, description }) => (
-  <div className="feature">
-    <h2>{title}</h2>
-    <p>{description}</p>
-  </div>
-);
 
-const FeaturesSection = () => (
-  <section className="features">
-    <Feature title="Real-time Tracking" description="Track your field force in real-time and optimize their routes for efficient operations." />
-    <Feature title="Task Assignment" description="Effortlessly assign tasks to your field agents and monitor task progress." />
-    <Feature title="Reporting and Analytics" description="Access comprehensive reports and analytics to make informed business decisions." />
-  </section>
-);
-
-const Footer = () => (
-  <footer className="footer">
-    <p>&copy; 2024 Field Force Management. All rights reserved.</p>
-  </footer>
-);
 
 
 const App=()=> {
@@ -62,9 +37,7 @@ const App=()=> {
             
           </Routes>
          
-    <HeroSection />
-    <FeaturesSection />
-    <Footer />
+  
         </>
      
       

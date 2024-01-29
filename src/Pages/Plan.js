@@ -133,7 +133,7 @@ const Plan = () => {
     <div>
         <Header/>
         <h2>Plan</h2>
-       
+       <Plantable/>
         <button onClick={handleCreate}>Create</button>
       <button onClick={handleUpdate}>Update</button>
       <button onClick={handleGet}>Get</button>
