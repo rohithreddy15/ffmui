@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './login.css'
 
 function Login() {
   const [loginid, setLoginId] = useState('');
@@ -10,28 +11,29 @@ function Login() {
   async function handleLogin(event) {
     event.preventDefault();
 
+    try {
       const response = await axios.post("http://localhost:8080/login", {
         loginid: loginid,
         password: password,
       });
 
       if (response.data.loginid) {
-        
         // Login successful, navigate to the home page or handle accordingly
         navigate('/home');
       } else {
-        
         // Login failed, show an error message or handle accordingly
         alert("Invalid credentials");
       }
-    
-    
+    } catch (error) {
+      console.error("Error during login:", error);
+      // Handle error appropriately
+    }
   }
 
   return (
-    <div>
-      <h2>Login Page</h2>
-      <form onSubmit={handleLogin}>
+    <div className="login-container">
+      <h2 className="login-title">Login Page</h2>
+      <form className="login-form" onSubmit={handleLogin}>
         <label>
           Username:
           <input
@@ -54,6 +56,6 @@ function Login() {
       </form>
     </div>
   );
-};
+}
 
 export default Login;

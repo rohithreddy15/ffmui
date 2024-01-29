@@ -1,4 +1,5 @@
 import React,{ useState } from "react"
+import './navbar.css'
 // import useHistory from 'react'
 import { useLocation } from "react-router-dom";
 export default function NavbarLoggedIn({ onLogout }) {
