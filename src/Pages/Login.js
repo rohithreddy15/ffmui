@@ -10,7 +10,6 @@ function Login() {
   async function handleLogin(event) {
     event.preventDefault();
 
-    
       const response = await axios.post("http://localhost:8080/login", {
         loginid: loginid,
         password: password,
