@@ -106,29 +106,7 @@ background-color: white;
 }
 /* Navbar styles */
 /* Navbar styles */
-nav {
-  background-color: #3497c1;
-  padding: 10px;
-}
 
-/* NavLink styles */
-NavLink {
-  color: #fff;
-  text-decoration: none;
-  margin-right: 10px;
-  padding: 8px 15px;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
 
-/* Active NavLink styles */
-NavLink.active {
-  background-color: #3267e1;
-}
 
-/* Hover effect for NavLink */
-NavLink:hover {
-  background-color: #549bec;
-}
 

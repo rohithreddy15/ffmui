@@ -1,0 +1,50 @@
+.hero {
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+   
+  }
+  
+  .hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 18px;
+    color: #070707;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px;
+  }
+  
+  .feature {
+    width: 30%;
+    background-color: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .feature p {
+    font-size: 16px;
+    color: #29c780;
+  }
+  
+  .footer {
+    background-color: #1261a1;
+    padding: 10px;
+    text-align: center;
+    color: white;
+  }
+ 
