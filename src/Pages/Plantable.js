@@ -29,9 +29,10 @@ function Plantable(props) {
 
   useEffect(() => {
     getPlan()
-  });
+  },[]);
   return (
     <div className='filter'>
+        {/* <button onClick={getPlan}>Table</button> */}
       {/* //{console.log(plan)} */}
       {/* <p>{transactions.map((transaction)=>console.log(transaction))}</p> */}
       <table className='plantable'>
