@@ -55,6 +55,11 @@ const Plan = () => {
 
       if (response.ok) {
         console.log(isUpdateMode ? 'plan data updated successfully!' : 'New plan created successfully!');
+        <div>
+          {formData.map((item)=>(
+            <div key={item.id}>{item.distance}</div>
+          ))}
+        </div>
         setShowForm(false); 
         setFormData({});
       } else {
@@ -64,6 +69,7 @@ const Plan = () => {
       console.error('Error:', error);
     }
   };
+  const [data1,setData1]=useState("");
 
   const handleGet = async () => {
     // Ask for empcode before making the GET request
@@ -81,6 +87,9 @@ const Plan = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Data fetched successfully:', data);
+        setData1("id : "+data.id);
+
+
         // Optionally, update the form with fetched data
         // setFormData(data);
       } else {
@@ -160,6 +169,8 @@ const Plan = () => {
       <br />
       <button type="submit">{isUpdateMode ? 'Update plan' : 'Create plan'}</button>
     </form>)}
+    
+    <p> {data1} </p>
     </div>
   );
 };
