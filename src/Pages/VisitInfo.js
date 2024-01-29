@@ -7,8 +7,8 @@ const VisitInfoForm = () => {
     from_longitude: -74.0060,
     to_latitude: 34.0522,
     to_longitude: -118.2437,
-    task_id: 123,
-    distance_travelled: 50.75,
+    taskid: 123,
+    distancetravelled: 50.75,
   });
 
   const handleChange = (e) => {
@@ -157,12 +157,12 @@ const VisitInfoForm = () => {
       <br />
       <label>
         Task ID:
-        <input type="number" name="task_id" value={formData.task_id} onChange={handleChange} />
+        <input type="number" name="taskid" value={formData.taskid} onChange={handleChange} />
       </label>
       <br />
       <label>
         Distance Travelled:
-        <input type="number" name="distance_travelled" value={formData.distance_travelled} onChange={handleChange} />
+        <input type="number" name="distancetravelled" value={formData.distancetravelled} onChange={handleChange} />
       </label>
       <br />
       <button type="submit">{isUpdateMode ? 'Update VisitInfo' : 'Create VisitInfo'}</button>

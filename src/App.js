@@ -8,6 +8,7 @@ import Employee from './Pages/Employee';
 import VisitInfo from './Pages/VisitInfo';
 import Plan from './Pages/Plan';
 import Task from './Pages/Task';
+import GetReimbursement from './Pages/GetReimbursement'
 
 // const Header = () => (
 //   <header className="header">
@@ -34,6 +35,7 @@ const App=()=> {
             <Route path="/Dealer" element={<Dealer />} />
             <Route path="/VisitInfo" element={<VisitInfo />} />
             <Route path="/Employee" element={<Employee />} />
+            <Route path="/getReimbursement" element={<GetReimbursement />} />
             
           </Routes>
          

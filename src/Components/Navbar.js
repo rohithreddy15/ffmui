@@ -19,6 +19,9 @@ export default function Navbar() {
     
  
  <NavLink to="/VisitInfo">VisitInfo</NavLink>
+ <br/>
+
+ <NavLink to="/GetReimbursement">getReimbursement</NavLink>
  
 
   

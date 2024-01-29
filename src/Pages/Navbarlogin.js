@@ -1,4 +1,5 @@
 import React,{ useState } from "react"
+import './navbar.css'
 // import useHistory from 'react'
 import { useLocation } from "react-router-dom";
 export default function NavbarLoggedIn({ onLogout }) {
@@ -39,6 +40,9 @@ export default function NavbarLoggedIn({ onLogout }) {
           </li>
           <li>
             <a href="/visitinfo">VisitInfo</a>
+          </li>
+          <li>
+            <a href="/getReimbursement">getReimbursement</a>
           </li>
           <li>
             <a href="/" onClick={onLogout}>Logout</a>

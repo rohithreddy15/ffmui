@@ -1,6 +1,6 @@
 import React,{ useState,useEffect } from 'react'
 
-
+import './plan.css';
 
 function Plantable(props) {
   const id = props.id || 'No  id provided';

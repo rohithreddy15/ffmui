@@ -1,0 +1,23 @@
+.filter {
+    margin: 20px;
+  }
+  .plantable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  .plantable th, .plantable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  .plantable th {
+    background-color: #F2F2F2;
+  }
+  /* Optional: Add some styling for hover effect or alternate row colors */
+  .plantable tbody tr:hover {
+    background-color: #F5F5F5;
+  }
+  .plantable tbody tr:nth-child(even) {
+    background-color: #F9F9F9;
+  }
