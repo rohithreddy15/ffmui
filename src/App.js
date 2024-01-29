@@ -9,12 +9,12 @@ import VisitInfo from './Pages/VisitInfo';
 import Plan from './Pages/Plan';
 import Task from './Pages/Task';
 
-const Header = () => (
-  <header className="header">
-    <h1>Field Force Management</h1>
-    <p>Optimize your field operations with our comprehensive management solution.</p>
-  </header>
-);
+// const Header = () => (
+//   <header className="header">
+//     <h1>Field Force Management</h1>
+//     <p>Optimize your field operations with our comprehensive management solution.</p>
+//   </header>
+// );
 
 const HeroSection = () => (
   <section className="hero">
@@ -61,7 +61,7 @@ const App=()=> {
             <Route path="/Employee" element={<Employee />} />
             
           </Routes>
-          <Header />
+         
     <HeroSection />
     <FeaturesSection />
     <Footer />
