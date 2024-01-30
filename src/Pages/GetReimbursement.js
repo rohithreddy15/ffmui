@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Header from './Header';
 import './getReim.css';
 
 function DistanceCalculator() {
@@ -28,11 +29,13 @@ function DistanceCalculator() {
   };
 
   return (
+
     <div>
-      <h2>Distance Calculator</h2>
+      <Header/>
+      <h2>Fuel Reimbursement Calculator</h2>
       <form onSubmit={handleCalculateDistance}>
         <label>
-          Enter Employee ID:
+           Employee ID:
           <input
             type="text"
             value={employeeId}
@@ -43,7 +46,28 @@ function DistanceCalculator() {
       </form>
       
       {distance !== null && (
-        <p>The total distance covered: {distance}</p>
+        <div>
+        {/* <p>The total distance covered by you : {distance} KM </p>
+        <br/>
+        <p>Cost per 1 KM travelled is 10 INR</p>
+        <br/>
+        <p>Therefore your Fuel Reimbursement is {distance*10}</p> */}
+        <table>
+          <tr>
+            <td>Distance :  </td>
+            <td>{distance}KM</td>
+          </tr>
+          <tr>
+            <td>Rate(per KM) :  </td>
+            <td>10 INR</td>
+          </tr>
+          <tr>
+            <td>Amount :  </td>
+            <td>{distance*10}</td>
+          </tr>
+        </table>
+       
+       </div>
       )}
     </div>
   );

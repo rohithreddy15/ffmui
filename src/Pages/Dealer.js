@@ -1,6 +1,6 @@
 
 
-
+import './Employee.css';
 import React, { useState } from 'react';
 import Header from './Header';
   const DealerForm = () => {
@@ -138,25 +138,24 @@ import Header from './Header';
   };
   
     return (
+      <>
       <div>
+    <h2>Dealer Registration</h2>
+    <table style={{padding:30}}>
+      <tr>
+    <td><button onClick={handleCreate}>Create</button></td>
+      <td><button onClick={handleUpdate}>Update</button></td>
+      <td><button onClick={handleGet}>Get</button></td>
+      <td> <button onClick={handleDelete}>Delete</button></td>
+      </tr>
+      </table>
+      </div>
+      <div >
           <Header/>
-        <h2>Dealer Registration</h2>
-       
-        <button onClick={handleCreate}>Create</button>
-      <button onClick={handleUpdate}>Update</button>
-      <button onClick={handleGet}>Get</button>
-    
-    <button onClick={handleDelete}>Delete</button>
-        {showForm&&(<form onSubmit={handleSubmit}>
-          <label>
-            ID:
-            <input
-              type="number"
-              name="id"
-              value={formData.id}
-              onChange={handleChange}
-            />
-          </label>
+        
+    <div className='form-container'>
+        {showForm&&(<form onSubmit={handleSubmit} >
+          
           <br />
           <label>
             First Name:
@@ -255,7 +254,9 @@ import Header from './Header';
           {/* Continue adding labels and inputs for the remaining attributes */}
           <button type="submit">{isUpdateMode ? 'Update Dealer' : 'Create Dealer'}</button>
         </form>)}
+        </div>
       </div>
+      </>
     );
   };
 

@@ -1,0 +1,29 @@
+.filter {
+    margin: 20px;
+    overflow: auto; /* Add this to enable scrolling */
+  }
+  .filter {
+    margin: 20px;
+    overflow: auto; /* Add this to enable scrolling */
+    max-height: 400px; /* Set a maximum height as needed */
+  }
+  .Tasktable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Ensure table uses fixed layout */
+  }
+  
+  .Tasktable th, .Tasktable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap; /* Prevent text wrapping in cells */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Display ellipsis for overflowed content */
+  }
+  
+  .Tasktable th {
+    background-color: #f2f2f2;
+  }
+      

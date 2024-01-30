@@ -9,6 +9,7 @@ const Plan = () => {
     completed_date: '',
     distance: 0,
     created_by: 1,
+    empid:''
   });
   const [showForm, setShowForm] = useState(false);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
@@ -130,19 +131,40 @@ const Plan = () => {
   };
 
   return (
+    <>
+    <div>
+    <h2>Plan</h2>
+    <table style={{justifyItems:'center',alignItems
+  :'center',padding:40}}>
+      <tr>
+    <td><button onClick={handleCreate}>Create</button></td>
+    <td><p>   </p></td>
+      <td><button onClick={handleUpdate}>Update</button></td>
+      <td><p>   </p></td>
+      
+      
+      <td><button onClick={handleGet}>Get</button></td>
+      <td><p>   </p></td>
+      <td> <button onClick={handleDelete}>Delete</button></td>
+      </tr>
+      </table>
+    </div>
     <div>
         <Header/>
-        <h2>Plan</h2>
+        
        <Plantable/>
-        <button onClick={handleCreate}>Create</button>
+       
+        {/* <button onClick={handleCreate}>Create</button>
+        <p> </p>
       <button onClick={handleUpdate}>Update</button>
+      <p></p>
       <button onClick={handleGet}>Get</button>
-    <button onClick={handleDelete}>Delete</button>
+      
+      <p></p>
+
+    <button onClick={handleDelete}>Delete</button> */}
     {showForm&&(<form onSubmit={handleSubmit}>
-      <label>
-        ID:
-        <input type="number" name="id" value={formData.id} onChange={handleChange} />
-      </label>
+     
       <br />
       <label>
         Status:
@@ -150,14 +172,11 @@ const Plan = () => {
       </label>
       <br />
       <label>
-        Created Date:
+        CreatedDate:
         <input type="date" name="created_date" value={formData.created_date} onChange={handleChange} />
       </label>
       <br />
-      <label>
-        Completed Date:
-        <input type="date" name="completed_date" value={formData.completed_date} onChange={handleChange} />
-      </label>
+    
       <br />
       <label>
         Distance:
@@ -165,8 +184,13 @@ const Plan = () => {
       </label>
       <br />
       <label>
-        Created By:
+        CreatedBy:
         <input type="number" name="created_by" value={formData.created_by} onChange={handleChange} />
+      </label>
+      <br/>
+      <label>
+        EmpId:
+        <input type="number" name="empid" value={formData.empid} onChange={handleChange} />
       </label>
       <br />
       <button type="submit">{isUpdateMode ? 'Update plan' : 'Create plan'}</button>
@@ -174,6 +198,7 @@ const Plan = () => {
     
     <p> {data1} </p>
     </div>
+    </>
   );
 };
 

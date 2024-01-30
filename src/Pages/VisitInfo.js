@@ -125,15 +125,14 @@ const VisitInfoForm = () => {
       <Header/>
         <h2>VisitInfo</h2>
         <button onClick={handleCreate}>Create</button>
+   
       <button onClick={handleUpdate}>Update</button>
+   
       <button onClick={handleGet}>Get</button>
-    
+   
     <button onClick={handleDelete}>Delete</button>
     {showForm&&(<form onSubmit={handleSubmit}>
-      <label>
-        ID:
-        <input type="number" name="id" value={formData.id} onChange={handleChange} />
-      </label>
+     
       <br />
       <label>
         From Latitude:

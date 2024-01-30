@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Header from './Header';
+
+import EmpTask from './EmpTask';
 const Task = () => {
   const [formData, setFormData] = useState({
     id: 1,
@@ -123,31 +125,44 @@ const Task = () => {
   };
 
   return (
+    <>
+    <div>
+    <h2>Task</h2>
+    <table style={{padding:40}}>
+      <tr>
+    <td><button onClick={handleCreate}>Create</button></td>
+    <td><p>   </p></td>
+      <td><button onClick={handleUpdate}>Update</button></td>
+      <td><p>   </p></td>
+      
+      
+      <td><button onClick={handleGet}>Get</button></td>
+      <td><p>   </p></td>
+      <td> <button onClick={handleDelete}>Delete</button></td>
+      </tr>
+      </table>
+    </div>
     <div>
      <Header/>
-        <h2>Task</h2>
-        <button onClick={handleCreate}>Create</button>
-      <button onClick={handleUpdate}>Update</button>
-      <button onClick={handleGet}>Get</button>
-    <button onClick={handleDelete}>Delete</button>
+        
+        {/* <Tasktable/> */}
+        <EmpTask/>
+       
     {showForm&&(<form onSubmit={handleSubmit}>
-      <label>
-        ID:
-        <input type="number" name="id" value={formData.id} onChange={handleChange} />
-      </label>
+      
       <br />
       <label>
-        Created_date:
+        CreatedDate:
         <input type="date" name="createddate" value={formData.created_date} onChange={handleChange} />
       </label>
       <br />
       <label>
-        Assigned_to:
+        AssignedTo:
         <input type="number" name="assignedto" value={formData.assigned_to} onChange={handleChange} />
       </label>
       <br />
       <label>
-        Dealer_id:
+        DealerId:
         <input type="number" name="dealerid" value={formData.dealerid} onChange={handleChange} />
       </label>
       <br />
@@ -156,7 +171,7 @@ const Task = () => {
         <input type="text" name="status" value={formData.status} onChange={handleChange} />
       </label>
       <br />
-      <label>
+      {/* <label>
         Category:
         </label>
          <select name="category" value={formData.category} onChange={handleChange}>
@@ -165,20 +180,21 @@ const Task = () => {
          <option>Promotions</option>
          <option>Other</option>
          </select>
-      <br/>
+      <br/> */}
       <label>
-        Assigned_Date:
+        StartDate:
         <input type="date" name="assigneddate" value={formData.assigned_date} onChange={handleChange} />
       </label>
       <br></br>
-      <label>
+      {/* <label>
         Completed_date:
         <input type="date" name="completeddate" value={formData.completed_date} onChange={handleChange} />
       </label>
-      <br />
+      <br /> */}
       <button type="submit">{isUpdateMode ? 'Update task' : 'Create task'}</button>
     </form>)}
     </div>
+    </>
   );
 };
 

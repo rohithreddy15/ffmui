@@ -1,0 +1,59 @@
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of the viewport */
+  height: 50px; /* Set your desired fixed height */
+  background-color: #2674ea; /* Add your desired background color */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand-name {
+  color: white; /* Add your desired color */
+  text-decoration: none;
+  font-size: 1.5rem; /* Add your desired font size */
+}
+.navigation-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+.navigation-menu li {
+  margin-right: 20px;
+}
+.navigation-menu a {
+  text-decoration: none;
+  color: white; /* Add your desired color */
+  font-size: 1rem; /* Add your desired font size */
+}
+/* Optional: Add some styling for hover effect or active link */
+.navigation-menu a:hover,
+.navigation-menu a.active {
+  text-decoration: underline;
+}
+
+.filter {
+  margin: 20px;
+}
+.plantable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.plantable th, .plantable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+.plantable th {
+  background-color: #F2F2F2;
+}
+/* Optional: Add some styling for hover effect or alternate row colors */
+.plantable tbody tr:hover {
+  background-color: #F5F5F5;
+}
+.plantable tbody tr:nth-child(even) {
+  background-color: #F9F9F9;
+}

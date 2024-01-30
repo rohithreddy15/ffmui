@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import './Employee.css'
 import Header from './Header';
 const Employee = () => {
   const [formData, setFormData] = useState({
-    empcode: 1,
+    empcode: '',
     first_name: '',
     last_name: '',
     addressline_1: '',
@@ -16,7 +17,7 @@ const Employee = () => {
     dateofbirth: '',
     password: '',
     created_at: '',
-    created_by: 1,
+    created_by: '',
     updated_at: '',
     updated_by: 1,
     isactive: false,
@@ -136,16 +137,30 @@ const Employee = () => {
 
 
   return (
+    <>
     <div>
+    <h2>Employee</h2>
+    <table style={{padding:50}}>
+      <tr>
+    <td><button onClick={handleCreate}>Create</button></td>
+    <td><p>   </p></td>
+      <td><button onClick={handleUpdate}>Update</button></td>
+      <td><p>   </p></td>
+      
+      
+      <td><button onClick={handleGet}>Get</button></td>
+      <td><p>   </p></td>
+      <td> <button onClick={handleDelete}>Delete</button></td>
+      </tr>
+      </table>
+      </div>
+    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
         <Header/>
-      <h2>Employee</h2>
-       <button onClick={handleCreate}>Create</button>
-      <button onClick={handleUpdate}>Update</button>
-   {showForm&&( <form  onSubmit={ handleSubmit }>
-      <label>
-        Empcode:
-        <input type="number" name="empcode" value={formData.empcode} onChange={handleChange} />
-      </label>
+      
+       
+      <div className='form-container'>
+   {showForm&&( <form  onSubmit={ handleSubmit } style={{ marginTop: '20px' }}>
+      
       <br />
       <label>
         First Name:
@@ -258,13 +273,13 @@ const Employee = () => {
         <input type="text" name="moblieno" value={formData.moblieno} onChange={handleChange} />
       </label>
       <br />
-      <button type="submit">{isUpdateMode ? 'Update Employee' : 'Create Employee'}</button>
+      <button type="submit">{isUpdateMode ? 'Update Employee' : 'SAVE'}</button>
             </form>)}
     
-    <button onClick={handleGet}>Get</button>
     
-      <button onClick={handleDelete}>Delete</button>
     </div>
+    </div>
+    </>
   );
 };
 
